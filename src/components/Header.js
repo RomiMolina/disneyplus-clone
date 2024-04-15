@@ -11,8 +11,28 @@ function Header() {
                 <img src="/images/home-icon.svg" alt="Home" />
                 <span>HOME</span>
             </a>
-            
+            <a hred="/home">
+                <img src="/images/search-icon.svg" alt="Home" />
+                <span>SEARCH</span>
+            </a>
+            <a hred="/home">
+                <img src="/images/watchlist-icon.svg" alt="Home" />
+                <span>WATCHLIST</span>
+            </a>
+            <a hred="/home">
+                <img src="/images/original-icon.svg" alt="Home" />
+                <span>ORIGINALS</span>
+            </a>
+            <a hred="/home">
+                <img src="/images/movie-icon.svg" alt="Home" />
+                <span>MOVIES</span>
+            </a>
+            <a hred="/home">
+                <img src="/images/series-icon.svg" alt="Home" />
+                <span>SERIES</span>
+            </a>
         </NavMenu>
+        <Login>Login</Login>
     </Nav>
   )
 };
@@ -115,6 +135,13 @@ padding: 0 12px;
 }
 `;
 
+
+const Login = styled.a`
+background-color: rgba(0, 0, 0, 0.6);
+padding: 8px 16px;
+text-transform:uppercase;
+letter-spacing: 1.5px;
+`
 
 
 export default Header
