@@ -1,12 +1,50 @@
-import styled from "styled-components"
 
-function Header() {
+import styled from "styled-components";
+import { useDispatch, useSelector} from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { auth, provider, firebaseApp } from "../firebase";
+import { selectUserEmail, selectUserName , selectUserPhoto, setUserLoginDetails} from '../features/user/userSlice'
+
+
+const Header = () => {
+    const dispatch = useDispatch();
+    const history = useNavigate();
+    const userName = useSelector(selectUserName);
+    const userEmail = useSelector(selectUserEmail);
+    const userPhoto = useSelector(selectUserPhoto);
+
+    const setUser = (user) => {
+        dispatch(setUserLoginDetails({
+            name: user.displayName,
+            email: user.email,
+            photo: user.photoURL,
+        }));
+    }
+      
+    const handleAuth = () => {
+        auth
+          .signInWithPopup(provider)
+          .then((result) => {
+            console.log(result.user);
+            setUser(result.user)
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
+      };
+
+
   return (
     <Nav>
         <Logo>
             <img src="/images/logo.svg" alt="Disney+" />
         </Logo>
-        <NavMenu>
+        {
+            !userName ?
+            <Login onClick={handleAuth}>Login</Login>
+            :
+            (<>
+            <NavMenu>
             <a hred="/home">
                 <img src="/images/home-icon.svg" alt="Home" />
                 <span>HOME</span>
@@ -32,7 +70,11 @@ function Header() {
                 <span>SERIES</span>
             </a>
         </NavMenu>
-        <Login>Login</Login>
+        <UserImg img={userPhoto} alt={userName} />
+        </>
+        )}
+        
+      
     </Nav>
   )
 };
@@ -141,7 +183,18 @@ background-color: rgba(0, 0, 0, 0.6);
 padding: 8px 16px;
 text-transform:uppercase;
 letter-spacing: 1.5px;
-`
+border: 1px solid #f9f9f9;
+border-radius: 4px;
+transition: all 0.2s ease 0; 
 
+&:hover {
+    background-color: #f9f9f9;
+    color: #000;
+    border-color: transparent;
+}
+`
+const UserImg = styled.img`
+    height: 100%;
+`
 
 export default Header
