@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function Recommends() {
+function NewDisney() {
   return (
     <Container>
-        <h4>Recommended for you</h4>
+        <h4>New to Disney+ </h4>
         <Content>
             <Wrap>
                 <Link to="/" >
@@ -80,4 +80,4 @@ img {
     border-color: rgba( 249, 249, 249, 0.8);
 }
 `;
-export default Recommends;
+export default NewDisney;
