@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector} from 'react-redux';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth, provider } from "../firebase";
 import { selectUserName , selectUserPhoto, setSignOutState, setUserLoginDetails} from '../features/user/userSlice'
 
@@ -56,9 +56,11 @@ const Header = () => {
 
   return (
     <Nav>
+        <Link to="/home">
         <Logo>
             <img src="/images/logo.svg" alt="Disney+" />
         </Logo>
+        </Link>
         {
             !userName ?
             <Login onClick={handleAuth}>Login</Login>
